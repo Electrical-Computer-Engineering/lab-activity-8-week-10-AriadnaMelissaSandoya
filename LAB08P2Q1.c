@@ -2,6 +2,7 @@
 // SBU ID: 116173809
 
 #include <stdio.h>
+#include <string.h>
 #include <stdbool.h>
 
 int my_strcmp(const char a[], const char b[]) {
@@ -61,22 +62,20 @@ char* my_strcat(char dest[], const char src[]) {
     return dest;
 }
 
-char* my_reverse(char str[]) {
-    int length = 0;
-    while (str[length] != '\0') {
-        length++;
+char* my_reverse(char* dest, const char* src) {
+    int len = strlen(src);
+    
+    // Copy string to the second string
+    strcpy(dest, src);
+    
+    // Reverse characters 
+    for (int i = 0, j = len - 1; i < j; i++, j--) {
+        char temp = dest[i];
+        dest[i] = dest[j];
+        dest[j] = temp;
     }
-
-    int i = 0;
-    int j = length - 1;
-    while (i < j) {
-        char temp = str[i];
-        str[i] = str[j];
-        str[j] = temp;
-        i++;
-        j--;
-    }
-    return str;
+    
+    return dest;
 }
 
 int main() {
@@ -110,8 +109,8 @@ int main() {
     printf("my_strcpy (string 3 and 4)): %s\n", my_strcpy(str3, str4));
     printf("my_strcat (string 1 and 2)): %s\n", my_strcat(str1, str2));
     printf("my_strcat (string 3 and 4)): %s\n", my_strcat(str3, str4));
-    printf("my_reverse (string 1)): %s\n", my_reverse(str1));
-    printf("my_reverse (string 3)): %s\n", my_reverse(str3));
+    printf("my_reverse (string 1 and 2)): %s\n", my_reverse(str1, str2));
+    printf("my_reverse (string 3 and 4)): %s\n", my_reverse(str3, str4));
 
     return 0;
 }
